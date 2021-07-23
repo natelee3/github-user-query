@@ -6,7 +6,8 @@ class SearchForm extends React.Component {
         super(props);
         this.state = {
             userName: '',
-            users: []
+            users: [],
+            lookedUp: []
         }
     }
 
@@ -21,16 +22,23 @@ class SearchForm extends React.Component {
         e.preventDefault();
         //get username value
         const userLookup = this.state.userName
-        //fetch Github API
-        const url = `https://api.github.com/users/${userLookup}`;
-        const response = await fetch(url)
-            .then(response => response.json());
-        //response = single user
-        // console.log(response)
-        //add response to array [...this.state.users, newUserData]
-        this.setState({
-            users: [...this.state.users, response]
-        })
+        if (this.state.lookedUp.includes(userLookup)) {
+            return console.log('duplicate');
+        } else {
+            //fetch Github API
+            const url = `https://api.github.com/users/${userLookup}`;
+            const response = await fetch(url)
+                .then(response => response.json());
+            //response = single user
+            console.log(response)
+            //add response to array [...this.state.users, newUserData]
+            this.setState({
+                users: [...this.state.users, response],
+                userName: '',
+                lookedUp: [...this.state.lookedUp, userLookup]
+            })
+        }
+        
     }
 
     render() {
@@ -38,7 +46,6 @@ class SearchForm extends React.Component {
             <>
                 <form onSubmit={this._handleSubmit}>
                     <label>
-                        Username:
                         <input
                             type="text"
                             value={this.state.userName}

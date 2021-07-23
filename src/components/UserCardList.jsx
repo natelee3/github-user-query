@@ -1,4 +1,5 @@
 import UserCard from './UserCard';
+import './UserCard.scss';
 
 const UserCardList = (props) => {
     //get users array from searchForm
