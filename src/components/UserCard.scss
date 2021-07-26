@@ -16,6 +16,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  text-decoration: none;
+}
+
 input {
   display: block;
   background: rgba($black, 0.1);
@@ -137,4 +141,8 @@ label {
     color: $dark-gray;
     font-weight: 600;
   }
+}
+
+.user-profile {
+  text-align: center;
 }
